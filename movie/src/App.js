@@ -2,41 +2,24 @@ import './App.css';
 import { useState, useEffect } from 'react';
 
 function App() {
-    const [toDo, setTodo] = useState('');
-    const [toDos, setToDos] = useState([]);
-    const onChange = (e) => {
-        setTodo(e.target.value);
-    };
+    const [loading, setLoading] = useState(true);
+    const [movies, setMovies] = useState([]);
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-        if (toDo === '') {
-            return;
-        }
-        setTodo('');
-        setToDos((prevArr) => {
-            return [toDo, ...prevArr];
-        });
+    const fetchMovie = async () => {
+        const responce = await fetch(
+            'http://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=f5eef3421c602c6cb7ea224104795888'
+        );
+        const responceJson = await responce.json();
+        console.log(responceJson);
+        setMovies(responceJson.movieListResult.movieList);
+        setLoading(false);
+        return responceJson;
     };
+    useEffect(() => {
+        fetchMovie();
+    }, []);
 
-    return (
-        <div className="App">
-            <h1>My To Do ({toDos.length})</h1>
-            <form onSubmit={onSubmit}>
-                <input
-                    onChange={onChange}
-                    value={toDo}
-                    type="text"
-                    placeholder="write your to do..."
-                />
-                <button>Add To Do</button>
-            </form>
-            <hr />
-            {toDos.map((todo, idx) => (
-                <li key={idx}>{todo}</li>
-            ))}
-        </div>
-    );
+    return <div className="App">{loading ? <h1>Loading...</h1> : null}</div>;
 }
 
 export default App;
