@@ -15,7 +15,7 @@ function App() {
         }
         setTodo('');
         setToDos((prevArr) => {
-            return [...prevArr, toDo];
+            return [toDo, ...prevArr];
         });
     };
 
@@ -31,6 +31,10 @@ function App() {
                 />
                 <button>Add To Do</button>
             </form>
+            <hr />
+            {toDos.map((todo, idx) => (
+                <li key={idx}>{todo}</li>
+            ))}
         </div>
     );
 }
