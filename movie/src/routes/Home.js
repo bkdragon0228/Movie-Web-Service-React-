@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
 import Movie from '../component/Movie';
+import { API_KEY, API_URL } from '../Config';
 
 function Home() {
     const [loading, setLoading] = useState(true);
     const [movies, setMovies] = useState([]);
-
-    const API_URL = 'https://api.themoviedb.org/3';
-    const API_KEY = 'a5a1eb270fa002cab6c71bb37180961c';
 
     const fetchMovie = async () => {
         const responce = await fetch(

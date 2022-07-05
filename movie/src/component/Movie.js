@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
+import { IMAGE_BASE_URL } from '../Config';
 
 function Movie({ movieArr }) {
-    const IMAGE_BASE_URL = 'http://image.tmdb.org/t/p/';
-
     return (
         <div key={movieArr.id}>
             <img
@@ -10,7 +9,7 @@ function Movie({ movieArr }) {
                 alt={movieArr.title}
             />
             <h2>
-                <Link to="/movie">{movieArr.title}</Link>
+                <Link to={`/movie/${movieArr.id}`}>{movieArr.title}</Link>
             </h2>
             <p>{movieArr.overview}</p>
         </div>
