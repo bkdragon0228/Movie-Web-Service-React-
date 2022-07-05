@@ -1,5 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
+import Movie from './component/Movie';
 
 function App() {
     const [loading, setLoading] = useState(true);
@@ -7,7 +8,6 @@ function App() {
 
     const API_URL = 'https://api.themoviedb.org/3';
     const API_KEY = 'a5a1eb270fa002cab6c71bb37180961c';
-    const IMAGE_BASE_URL = 'http://image.tmdb.org/t/p/';
 
     const fetchMovie = async () => {
         const responce = await fetch(
@@ -29,14 +29,7 @@ function App() {
             ) : (
                 <div>
                     {movies.map((movie) => (
-                        <div key={movie.id}>
-                            <img
-                                src={`${IMAGE_BASE_URL}w500/${movie.backdrop_path}`}
-                            />
-                            <h2>{movie.title}</h2>
-                            <p>{movie.overview}</p>
-                            {/* <ul>{}</ul> */}
-                        </div>
+                        <Movie movieArr={movie} key={movie.id} />
                     ))}
                 </div>
             )}
