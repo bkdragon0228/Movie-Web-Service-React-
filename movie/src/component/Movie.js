@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 function Movie({ movieArr }) {
     const IMAGE_BASE_URL = 'http://image.tmdb.org/t/p/';
 
@@ -7,7 +9,9 @@ function Movie({ movieArr }) {
                 src={`${IMAGE_BASE_URL}w500/${movieArr.backdrop_path}`}
                 alt={movieArr.title}
             />
-            <h2>{movieArr.title}</h2>
+            <h2>
+                <Link to="/movie">{movieArr.title}</Link>
+            </h2>
             <p>{movieArr.overview}</p>
         </div>
     );
